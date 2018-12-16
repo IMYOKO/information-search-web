@@ -1,0 +1,274 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1, user-scalable=no">
+	<title>首页</title>
+	<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+	<link rel="stylesheet" type="text/css" href="css/style.css"/>
+	<!--[if lte IE 8]>
+		<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<!-- banner star -->
+	<div class="banner-wrapper">
+		<div class="midder-wrapper">
+			<div class="banner-infor">
+				<div class="infor-box">
+					<h3>天津市</h3>
+					<p><span>特种作业操作证</span>及安全生产知识和管理<span>能力考核</span></p>
+					<h2>信息查询</h2>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- banner end -->
+
+	<!-- seach star -->
+	<div class="search-wrapper">
+		<div class="midder-wrapper">
+			<div class="search-content">
+				<div class="form-wrapper">
+					<ul class="form-list">
+						<li>
+							<div class="title">身份证号：</div>
+							<div class="form-box">
+								<input type="text" class="input-item" id="id-card" value="">
+							</div>
+							<div class="error" id="id-card-error">
+								<i></i><span>信息填写错误</span>
+							</div>
+						</li>
+						<li>
+							<div class="title">姓名：</div>
+							<div class="form-box">
+								<input type="text" class="input-item" id="user" value="">
+							</div>
+							<div class="error" id="user-error">
+								<i></i><span>信息填写错误</span>
+							</div>
+						</li>
+						<li class="last">
+							<div class="title">验证码：</div>
+							<div class="form-box clearfix">
+								<input type="text" class="input-item input-item-02" id="code" value="">
+								<div class="img-box">
+									<img src="./images/validateCodeServlet.jpg" alt="">
+								</div>
+								<div class="change-img"><span class="no-see">看不清？</span><span class="change">换一张</span></div>
+							</div>
+							<div class="error" id="code-error">
+								<i></i><span>信息填写错误</span>
+							</div>
+						</li>
+					</ul>
+					<div class="buttom-box">
+						<button type="buttom" class="buttom" id="sumbit">查询</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- seach end -->
+
+	<!-- table star -->
+	<div class="table-wrapper">
+		<div class="midder-wrapper">
+			<div class="table-content">
+				<div class="title">
+					<h2>查询结果</h2>
+				</div>
+				<div class="table-box">
+					<!-- 有结果状态 star -->
+					<div class="table-item">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>作业类别</th>
+									<th>操作项目</th>
+									<th>考试类别</th>
+									<th>初次发证日期</th>
+									<th>有效期开始日期</th>
+									<th>有效截止日期</th>
+									<th>应复审日期</th>
+									<th>实际复审日期</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>制冷与空调作业</td>
+									<td>制冷与空</td>
+									<td>制冷</td>
+									<td>2009.10.10</td>
+									<td>2009.10.10</td>
+									<td>2009.10.10</td>
+									<td>2009.10.10</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>制冷与空调作业</td>
+									<td>制冷与空</td>
+									<td>制冷</td>
+									<td>2009.10.10</td>
+									<td>2009.10.10</td>
+									<td>2009.10.10</td>
+									<td>2009.10.10</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>制冷与空调作业</td>
+									<td>制冷与空</td>
+									<td>制冷</td>
+									<td>2009.10.10</td>
+									<td>2009.10.10</td>
+									<td>2009.10.10</td>
+									<td>2009.10.10</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>制冷与空调作业</td>
+									<td>制冷与空</td>
+									<td>制冷</td>
+									<td>2009.10.10</td>
+									<td>2009.10.10</td>
+									<td>2009.10.10</td>
+									<td>2009.10.10</td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<!-- 有结果状态 end -->
+				</div>
+				
+				<div class="table-box">
+					<!-- 无结果状态 star -->
+					<div class="table-no-infor">
+						<div class="no-infor-box clearfix">
+							<div class="img-box">
+								<img src="./images/search_result@2x.png" alt="">
+							</div>
+							<div class="tips">
+								<h3>暂未查询到相关信息</h3>
+								<p>请确认个人信息是否输入有误，或由于网络问题暂未上传查询结果</p>
+							</div>
+						</div>
+					</div>
+					<!-- 无结果状态 end -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- table end -->
+
+<!--js star-->
+<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+// 设置html根字体大小
+(function() {
+	function newRem() {
+		var html = document.documentElement;
+		var wid = document.body.clientWidth;
+		if (wid > 1200) {
+			html.style.fontSize = "120px";
+		} else if (wid < 320) {
+			html.style.fontSize = "32px";
+		} else {
+			html.style.fontSize = wid / 10 + 'px';
+		}
+	};
+	newRem();
+	if(document.addEventListener) {
+		window.addEventListener('resize', newRem, false);
+	} else {
+		window.attachEvent('resize', newRem); // ie8
+	}
+})();
+$(function(){
+	var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+
+	// 输入身份证
+	$('#id-card').blur(function(){
+		var idCard = $(this).val();
+		if(idCard == '') {
+			$('#id-card').addClass('err');
+			$('#id-card-error').show();
+			$('#id-card-error span').html('身份证号不能为空！');
+		} else if(!reg.test(idCard)) {
+			$('#id-card').addClass('err')
+			$('#id-card-error').show();
+			$('#id-card-error span').html('请输入正确的身份证号码！');
+		} else {
+			$('#id-card').removeClass('err')
+			$('#id-card-error').hide();
+			$('#id-card-error span').html('');
+		}
+	})
+
+	// 输入姓名
+	$('#user').blur(function(){
+		var user = $(this).val();
+		if(user == '') {
+			$('#user').addClass('err')
+			$('#user-error').show();
+			$('#user-error span').html('姓名不能为空！');
+		} else {
+			$('#user').removeClass('err')
+			$('#user-error').hide();
+			$('#user-error span').html('');
+		}
+	})
+
+	// 输入验证码
+	$('#code').blur(function(){
+		var code = $(this).val();
+		if(code == '') {
+			$('#code').addClass('err')
+			$('#code-error').show();
+			$('#code-error span').html('验证码不能为空！');
+		} else {
+			$('#code').removeClass('err')
+			$('#code-error').hide();
+			$('#code-error span').html('');
+		}
+	})
+
+	// 提交数据...
+	$('#sumbit').click(function(){
+		var idCard = $('#id-card').val();
+		var user = $('#user').val();
+		var code = $('#code').val();
+		console.log(idCard == '');
+		if(idCard == '') {
+			$('#id-card').addClass('err');
+			$('#id-card-error').show();
+			$('#id-card-error span').html('身份证号不能为空！');
+			return false;
+		}
+		if(!reg.test(idCard)) {
+			$('#id-card').addClass('err')
+			$('#id-card-error').show();
+			$('#id-card-error span').html('请输入正确的身份证号码！');
+			return false;
+		}
+		if(user == '') {
+			$('#user').addClass('err')
+			$('#user-error').show();
+			$('#user-error span').html('姓名不能为空！');
+			return false;
+		}
+		if(code == '') {
+			$('#code').addClass('err')
+			$('#code-error').show();
+			$('#code-error span').html('验证码不能为空！');
+			return false;
+		}
+
+		// 请求数据操作...
+	})
+})
+</script>
+<!--js end-->
+</body>
+</html>

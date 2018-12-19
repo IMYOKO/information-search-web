@@ -6,9 +6,6 @@
 	<title>首页</title>
 	<link rel="stylesheet" type="text/css" href="css/reset.css"/>
 	<link rel="stylesheet" type="text/css" href="css/style.css"/>
-	<!--[if lte IE 8]>
-		<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
-	<![endif]-->
 </head>
 <body>
 	<!-- banner star -->
@@ -37,7 +34,7 @@
 								<input type="text" class="input-item" id="id-card" value="">
 							</div>
 							<div class="error" id="id-card-error">
-								<i></i><span>信息填写错误</span>
+								<i></i><span id="id-card-error-text"></span>
 							</div>
 						</li>
 						<li>
@@ -46,7 +43,7 @@
 								<input type="text" class="input-item" id="user" value="">
 							</div>
 							<div class="error" id="user-error">
-								<i></i><span>信息填写错误</span>
+								<i></i><span id="user-error-text"></span>
 							</div>
 						</li>
 						<li class="last">
@@ -59,7 +56,7 @@
 								<div class="change-img"><span class="no-see">看不清？</span><span class="change">换一张</span></div>
 							</div>
 							<div class="error" id="code-error">
-								<i></i><span>信息填写错误</span>
+								<i></i><span id="code-error-text"></span>
 							</div>
 						</li>
 					</ul>
@@ -250,7 +247,6 @@
 	<!-- table end -->
 
 <!--js star-->
-<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" charset="utf-8">
 // 设置html根字体大小
 (function() {
@@ -272,89 +268,102 @@
 		window.attachEvent('resize', newRem); // ie8
 	}
 })();
-$(function(){
+
+window.onload = function(){
 	var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+	var idCard = document.getElementById('id-card');
+	var user = document.getElementById('user');
+	var code = document.getElementById('code');
+	var sumbit = document.getElementById('sumbit');
+
+	var idCard_error = document.getElementById('id-card-error');
+	var user_error = document.getElementById('user-error');
+	var code_error = document.getElementById('code-error');
+
+	var idCard_error_text = document.getElementById('id-card-error-text');
+	var user_error_text = document.getElementById('user-error-text');
+	var code_error_text = document.getElementById('code-error-text');
 
 	// 输入身份证
-	$('#id-card').blur(function(){
-		var idCard = $(this).val();
-		if(idCard == '') {
-			$('#id-card').addClass('err');
-			$('#id-card-error').show();
-			$('#id-card-error span').html('身份证号不能为空！');
-		} else if(!reg.test(idCard)) {
-			$('#id-card').addClass('err')
-			$('#id-card-error').show();
-			$('#id-card-error span').html('请输入正确的身份证号码！');
+	idCard.onblur = function(){
+		var value = this.value;
+		if(value == '') {
+			this.setAttribute('class', 'input-item err');
+			idCard_error.style.display = 'block';
+			idCard_error_text.innerHTML = '身份证号不能为空！';
+		} else if(!reg.test(value)) {
+			this.setAttribute('class', 'input-item err');
+			idCard_error.style.display = 'block';
+			idCard_error_text.innerHTML = '请输入正确的身份证号码！';
 		} else {
-			$('#id-card').removeClass('err')
-			$('#id-card-error').hide();
-			$('#id-card-error span').html('');
+			this.setAttribute('class', 'input-item');
+			idCard_error.style.display = 'none';
+			idCard_error_text.innerHTML = '';
 		}
-	})
+	}
 
 	// 输入姓名
-	$('#user').blur(function(){
-		var user = $(this).val();
-		if(user == '') {
-			$('#user').addClass('err')
-			$('#user-error').show();
-			$('#user-error span').html('姓名不能为空！');
-		} else {
-			$('#user').removeClass('err')
-			$('#user-error').hide();
-			$('#user-error span').html('');
+	user.onblur = function(){
+		var value = this.value;
+		if(value == '') {
+			this.setAttribute('class', 'input-item err');
+			user_error.style.display = 'block';
+			user_error_text.innerHTML = '姓名不能为空！';
+		}else {
+			this.setAttribute('class', 'input-item');
+			user_error.style.display = 'none';
+			user_error_text.innerHTML = '';
 		}
-	})
+	}
 
 	// 输入验证码
-	$('#code').blur(function(){
-		var code = $(this).val();
-		if(code == '') {
-			$('#code').addClass('err')
-			$('#code-error').show();
-			$('#code-error span').html('验证码不能为空！');
-		} else {
-			$('#code').removeClass('err')
-			$('#code-error').hide();
-			$('#code-error span').html('');
+	code.onblur = function(){
+		var value = this.value;
+		if(value == '') {
+			this.setAttribute('class', 'input-item input-item-02 err');
+			code_error.style.display = 'block';
+			code_error_text.innerHTML = '验证码不能为空！';
+		}else {
+			this.setAttribute('class', 'input-item input-item-02');
+			code_error.style.display = 'none';
+			code_error_text.innerHTML = '';
 		}
-	})
+	}
 
-	// 提交数据...
-	$('#sumbit').click(function(){
-		var idCard = $('#id-card').val();
-		var user = $('#user').val();
-		var code = $('#code').val();
-		console.log(idCard == '');
-		if(idCard == '') {
-			$('#id-card').addClass('err');
-			$('#id-card-error').show();
-			$('#id-card-error span').html('身份证号不能为空！');
+	// 提交数据
+	sumbit.onclick = function() {
+		var idCard_value = idCard.value;
+		var user_value = user.value;
+		var code_value = code.value;
+
+		if(idCard_value == '') {
+			idCard.setAttribute('class', 'input-item err');
+			idCard_error.style.display = 'block';
+			idCard_error_text.innerHTML = '身份证号不能为空！';
 			return false;
 		}
-		if(!reg.test(idCard)) {
-			$('#id-card').addClass('err')
-			$('#id-card-error').show();
-			$('#id-card-error span').html('请输入正确的身份证号码！');
+		if(!reg.test(idCard_value)) {
+			idCard.setAttribute('class', 'input-item err');
+			idCard_error.style.display = 'block';
+			idCard_error_text.innerHTML = '请输入正确的身份证号码！';
 			return false;
 		}
-		if(user == '') {
-			$('#user').addClass('err')
-			$('#user-error').show();
-			$('#user-error span').html('姓名不能为空！');
+		if(user_value == '') {
+			user.setAttribute('class', 'input-item err');
+			user_error.style.display = 'block';
+			user_error_text.innerHTML = '姓名不能为空！';
 			return false;
 		}
-		if(code == '') {
-			$('#code').addClass('err')
-			$('#code-error').show();
-			$('#code-error span').html('验证码不能为空！');
+		if(code_value == '') {
+			code.setAttribute('class', 'input-item input-item-02 err');
+			code_error.style.display = 'block';
+			code_error_text.innerHTML = '验证码不能为空！';
 			return false;
 		}
 
 		// 请求数据操作...
-	})
-})
+	}
+}
 </script>
 <!--js end-->
 </body>
